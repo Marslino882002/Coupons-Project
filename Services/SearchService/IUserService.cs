@@ -9,7 +9,9 @@ namespace FoodCoupons.ReopositoryL
 {
     public interface IUserService 
     {
-        Task<List<User>> SearchIdsAsync(int searchValue);
+        Task<List<User>> SearchIdsAsync();
         Task<string>GetEmployeeQRCode(string userId);
+        Task<List<User>> SearchIdsAsync(int searchValue);
+
     }
 }

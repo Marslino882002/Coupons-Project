@@ -79,9 +79,21 @@ public class UserController : ControllerBase
     }
     [AllowAnonymous]
     [HttpGet]
-    public async Task<IActionResult> SearchIds(int searchValue)
+
+
+    public async Task<IActionResult> SearchIds([FromQuery]int? searchword = null)
+
     {
-        var filteredIds = await _userService.SearchIdsAsync(searchValue);
+
+
+
+        if (searchword is not null)
+        {
+            var result = await _userService.SearchIdsAsync(searchword.Value);
+
+            return Ok(result);
+        }
+        var filteredIds = await _userService.SearchIdsAsync();
         return Ok(filteredIds);
     }
     [Authorize]

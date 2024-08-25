@@ -88,6 +88,14 @@ namespace Services.QRCodeService
 
       var user =  _dbContext.Users.FirstOrDefault(x => x.EmployeeId == Convert.ToInt32(employeeId));
 
+            var ScanResult = _dbContext.acc_Monitor_Logs.
+                FirstOrDefault(x => x.pin == employeeId && x.time.Date == DateTime.Now.Date);
+            if (ScanResult != null) 
+            {
+                return false;
+            
+            }
+
             if (user is not null) 
             {
 

@@ -26,14 +26,11 @@ namespace Services.SearchService
         {
             _context = context;
         }
-        public async Task<List<User>> SearchIdsAsync(int searchValue)
+        public async Task<List<User>> SearchIdsAsync()
         {
 
-            var filteredUsers = new List<User>();
-            var searchTerm = searchValue.ToString();
             var employees = _context.Users.ToList();
-            filteredUsers = employees.Where(x => x.EmployeeId.ToString().StartsWith(searchTerm)).ToList();
-            return filteredUsers ;
+            return employees;
 
 
         }
@@ -45,6 +42,26 @@ namespace Services.SearchService
             var result = qrCode == null ?"QR code not found":Convert.ToBase64String(qrCode.QRCode);
             return result;
         }
+
+
+        //overloading
+        public async Task<List<User>> SearchIdsAsync(int searchValue)
+        {
+
+            var filteredUsers = new List<User>();
+            var searchTerm = searchValue.ToString();
+            var employees = _context.Users.ToList();
+            filteredUsers = employees.Where(x => x.EmployeeId.ToString().StartsWith(searchTerm)).ToList();
+            return filteredUsers;
+
+
+        }
+
+
+
+
+
+
 
 
     }
